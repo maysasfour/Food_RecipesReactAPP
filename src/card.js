@@ -1,9 +1,8 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { useState } from 'react';
+
 
 function CardComp(props){
-    let [counter,setCounter] =useState(0)
 
     return(
         <Card style={{ width: '18rem' }}>

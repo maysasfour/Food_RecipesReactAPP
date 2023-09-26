@@ -1,7 +1,7 @@
 import data from './data.json';
 import CardComp from './card';
 import './main.css';
-
+//data[0]."title"
 function Main(){
     return (
         <>
