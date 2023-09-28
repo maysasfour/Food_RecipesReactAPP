@@ -29,7 +29,7 @@ function CardComp(props){
         <Modal.Header closeButton>
           <Modal.Title>{props.title}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{props.description}<br/> <b>Category: {props.category}$</b></Modal.Body>
+        <Modal.Body>{props.description}<br/> <b>Category: {props.category}</b></Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleShow}>
             Close
