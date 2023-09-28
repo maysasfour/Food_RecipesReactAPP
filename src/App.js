@@ -1,7 +1,9 @@
-import logo from './logo.svg';
+
 import './App.css';
 import Header from './header';
 import Main from './main';
+import { BrowserRouter , Routes, Route } from 'react-router-dom';
+import Recipes from './recipes';
 
 
 function App() {
@@ -23,8 +25,16 @@ function App() {
     //     </a>
     //   </header>
     // </div> */}
+
     <Header/>
-    <Main/>
+    <BrowserRouter>
+  <Routes>
+  <Route path="/" Component={Main} ></Route>
+  <Route path="/recipes" Component={Recipes} ></Route>
+  </Routes>
+</BrowserRouter> 
+  
+    {/* <Main/> */}
     </>
   );
 }
