@@ -26,20 +26,23 @@ function Main(){
 
               <Button variant="outline-success" type="submit">Search</Button>
               </Form>
+
         <div id="container">
-      
-       {items.map(function(item)       {
+        {items.length === 0 ? (
+          <h2 style = {{marginLeft: "240px"}}> No Search Results</h2>
+        ) :(
+       items.map(function(item)       {
         return(
 
         <CardComp image={item.image_url} title={item.title} description={item.description} category={item.category}/>
-       )
-       }
-       )
-        }
-        </div>
-      
-        </>
-
-      );
-    }
+        )
+    
+}) 
+    )
+}
+    
+</div>
+</>
+);
+}
 export default Main;

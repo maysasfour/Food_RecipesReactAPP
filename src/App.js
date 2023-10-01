@@ -2,8 +2,8 @@
 import './App.css';
 import Header from './header';
 import Main from './main';
-import { BrowserRouter , Routes, Route } from 'react-router-dom';
-import Recipes from './recipes';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Browse from './browse';
 
 
 function App() {
@@ -27,12 +27,12 @@ function App() {
     // </div> */}
 
     <Header/>
-    <BrowserRouter>
-  <Routes>
+    <Router>
+      <Routes>
   <Route path="/" Component={Main} ></Route>
-  <Route path="/recipes" Component={Recipes} ></Route>
+  <Route path="/browse" Component={Browse} ></Route>
   </Routes>
-</BrowserRouter> 
+    </Router>
   
     {/* <Main/> */}
     </>

@@ -1,0 +1,11 @@
+#select-category{
+    width: 800px;
+    align-content: center ;
+    margin-top: 30px;
+    margin-left: 30px;
+    border: #7d8591 solid 1px;
+}
+
+#select-category:hover {
+    border: #7d8591 solid 1px;
+}
