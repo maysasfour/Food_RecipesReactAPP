@@ -1,48 +1,88 @@
-import data from './data.json';
 import CardComp from './card';
 import './main.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-//data[0]."title"
-function Main(){
-    let [items,setItems] = useState(data)
-    function handleSubmit(event){
-        event.preventDefault()
-        let searchedValue= event.target.search.value;
-        let filteredItems = data.filter(function(item){return  item.title.toLowerCase().includes(searchedValue.toLowerCase())})
-        setItems(filteredItems);
+
+function Main() {
+  let [items, setItems] = useState([]);
+  let [meals, setMeals] = useState([]);
+
+  // function handleSubmit(event) {
+  //   event.preventDefault();
+  //   let searchedValue = event.target.search.value;
+  //   let filteredItems = meals.filter(function (item) {
+  //     return item.strMeal.toLowerCase().includes(searchedValue.toLowerCase());
+  //   });
+  //   setItems(filteredItems);
+  // }
+
+  async function getMealsData() {
+    let response = await fetch("https://www.themealdb.com/api/json/v1/1/search.php?f=m");
+    let data = await response.json();
+    setMeals(data.meals);
+    setItems(data.meals);
+  }
+
+  useEffect(function () {
+    getMealsData();
+  }, []);
+  
+  async function handleSubmit(event) {
+    event.preventDefault();
+    let searchedValue = event.target.search.value;
+    const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchedValue}`;
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+
+       if (data.meals) {
+         let filteredValue = data.meals.filter(function (item) {
+           return item.strMeal
+             .toLowerCase()
+             .includes(searchedValue.toLowerCase());
+         });
+
+         setItems(filteredValue);
+       } else {
+        setItems([]);
+       }
+
+    } catch (error) {
+      console.error(error);
     }
-    return (
-        <>
-                    <Form className="d-flex" onSubmit={handleSubmit} id="myform">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-              name="search"
+  }
+
+  return (
+    <>
+      <Form className="d-flex" onSubmit={handleSubmit} id="myform">
+        <Form.Control
+          type="search"
+          placeholder="Search"
+          className="me-2"
+          aria-label="Search"
+          name="search"
+        />
+        <Button variant="outline-success" type="submit">Search</Button>
+      </Form>
+
+      <div className="container">
+        {items.length !== 0 ? items.map(function (item) {
+          return (
+            <CardComp
+              image={item.strMealThumb}
+              title={item.strMeal}
+              description={item.strInstructions}
+              category={item.strCategory}
             />
-
-              <Button variant="outline-success" type="submit">Search</Button>
-              </Form>
-
-        <div id="container">
-        {items.length === 0 ? (
-          <h2 style = {{marginLeft: "240px"}}> No Search Results</h2>
-        ) :(
-       items.map(function(item)       {
-        return(
-
-        <CardComp image={item.image_url} title={item.title} description={item.description} category={item.category}/>
-        )
-    
-}) 
-    )
+          );
+        }) : <h3>No Search Results</h3>}
+      </div>
+    </>
+  );
 }
-    
-</div>
-</>
-);
-}
+
 export default Main;
+
+

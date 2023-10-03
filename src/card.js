@@ -10,6 +10,24 @@ function CardComp(props){
     setShow(!show);
 
     }
+    function saveToLocalStorage(){
+      if(JSON.parse(localStorage.getItem("favorites"))){
+          let stringData= localStorage.getItem("favorites")
+          let arr= JSON.parse(stringData)
+          let data =props
+          arr.push(data)
+          let stringedData = JSON.stringify(arr)
+
+          localStorage.setItem("favorites", stringedData)
+      }
+      else {
+          let arr=[]
+          let data = props
+          arr.push(data)
+          let stringedData = JSON.stringify(arr)
+          localStorage.setItem("favorites", stringedData)
+      }
+  }
     return(
         <>
         <Card style={{ width: '18rem' }}>
@@ -34,11 +52,10 @@ function CardComp(props){
           <Button variant="secondary" onClick={handleShow}>
             Close
           </Button>
-    
+
         </Modal.Footer>
       </Modal>
       </>
     )
 }
 export default CardComp;
-

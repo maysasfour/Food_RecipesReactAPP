@@ -2,8 +2,9 @@
 import './App.css';
 import Header from './header';
 import Main from './main';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter , Routes, Route } from 'react-router-dom';
 import Browse from './browse';
+
 
 
 function App() {
@@ -26,13 +27,13 @@ function App() {
     //   </header>
     // </div> */}
 
-    <Header/>
-    <Router>
-      <Routes>
+<Header/>
+    <BrowserRouter>
+  <Routes>
   <Route path="/" Component={Main} ></Route>
   <Route path="/browse" Component={Browse} ></Route>
   </Routes>
-    </Router>
+</BrowserRouter>
   
     {/* <Main/> */}
     </>
